@@ -10,17 +10,24 @@ import (
 
 func main() {
 	url := "http://google.co.jp"
-	resp, err := http.Get(url)
-	defer resp.Body.Close()
+	resp, err := getResponseBody(url)
 	handleError(err)
-
-	byteArray, err := ioutil.ReadAll(resp.Body)
-	handleError(err)
-	println(string(byteArray))
+	println(resp)
 
 	out, err := exec.Command("ls", "-la").Output()
 	handleError(err)
 	println(string(out))
+}
+
+func getResponseBody(url string) (response string, err error) {
+	resp, err := http.Get(url)
+	defer resp.Body.Close()
+	if err != nil {
+		return "", err
+	}
+
+	byteArray, err := ioutil.ReadAll(resp.Body)
+	return string(byteArray), err
 }
 
 func handleError(err error) {
