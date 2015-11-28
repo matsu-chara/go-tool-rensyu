@@ -6,7 +6,7 @@ import (
 	"os/exec"
     "./tsurapoyo"
     "./get"
-)
+ )
 
 func main() {
     url := "http://google.co.jp"
@@ -20,6 +20,7 @@ func main() {
 
     poyo := &tsurapoyo.Tsurapoyo{"つらい", "とても"}
     println(poyo.HontoNoKimochi())
+    tsurapoyo.Doubled(poyo)
 }
 
 
